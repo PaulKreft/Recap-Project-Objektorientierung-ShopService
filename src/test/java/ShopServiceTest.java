@@ -66,4 +66,63 @@ class ShopServiceTest {
         // THEN
         assertTrue(actual.isEmpty());
     }
+
+    @Test
+    void updateOrderTest_whenUpdateOrderToCompleted_thenShowOrderAsCompleted() {
+        // GIVEN
+        ShopService shopService = new ShopService();
+
+        List<String> productIds = List.of("1", "2");
+        Order orderToUpdate = shopService.addOrder(productIds);
+
+        // WHEN
+        shopService.updateOrder(orderToUpdate.id(), OrderStatus.COMPLETED);
+
+        Order updatedOrder = shopService.getOrderById(orderToUpdate.id());
+
+        // THEN
+        assertSame(updatedOrder.status(), OrderStatus.COMPLETED);
+    }
+
+    @Test
+    void updateOrderTest_whenUpdateOrderWithInvalidIdToCompleted_thenReturnNull() {
+        // GIVEN
+        ShopService shopService = new ShopService();
+
+        List<String> productIds = List.of("1", "2");
+        shopService.addOrder(productIds);
+
+        // WHEN
+        Order updatedOrder = shopService.updateOrder("orderToUpdate.id()", OrderStatus.COMPLETED);
+
+        // THEN
+        assertNull(updatedOrder);
+    }
+
+    @Test
+    void getOrderByIdTest_whenValidId_thenReturnOrder() {
+        // GIVEN
+        ShopService shopService = new ShopService();
+
+        List<String> productIds = List.of("1", "2");
+        Order orderToUpdate = shopService.addOrder(productIds);
+
+        // WHEN
+        Order order = shopService.getOrderById(orderToUpdate.id());
+
+        // THEN
+        assertEquals(orderToUpdate, order);
+    }
+
+    @Test
+    void getOrderByIdTest_whenInvalidId_thenReturnNull() {
+        // GIVEN
+        ShopService shopService = new ShopService();
+
+        // WHEN
+        Order order = shopService.updateOrder("orderToUpdate.id()", OrderStatus.COMPLETED);
+
+        // THEN
+        assertNull(order);
+    }
 }
