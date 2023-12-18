@@ -23,7 +23,7 @@ class ShopServiceTest {
     }
 
     @Test
-    void addOrderTest_whenInvalidProductId_expectNoSuchElementException() {
+    void addOrderTest_whenInvalidProductId_thenExpectNoSuchElementException() {
         //GIVEN
         ShopService shopService = new ShopService();
         List<String> productsIds = List.of("hallo world");
@@ -38,7 +38,7 @@ class ShopServiceTest {
     }
 
     @Test
-    void getOrdersByStatusTest_WhenFilterByProcessing_ReturnOneOrder() {
+    void getOrdersByStatusTest_whenFilterByProcessing_thenReturnOneOrder() {
         // GIVEN
         ShopService shopService = new ShopService();
 
@@ -53,7 +53,7 @@ class ShopServiceTest {
     }
 
     @Test
-    void getOrdersByStatusTest_WhenFilterByCompleted_ReturnEmptyList() {
+    void getOrdersByStatusTest_whenFilterByCompleted_thenReturnEmptyList() {
         // GIVEN
         ShopService shopService = new ShopService();
 
