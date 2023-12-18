@@ -25,7 +25,7 @@ class ShopServiceTest {
     void addOrderTest_whenInvalidProductId_expectNull() {
         //GIVEN
         ShopService shopService = new ShopService();
-        List<String> productsIds = List.of("1", "2");
+        List<String> productsIds = List.of("hallo world");
 
         //WHEN
         Order actual = shopService.addOrder(productsIds);
