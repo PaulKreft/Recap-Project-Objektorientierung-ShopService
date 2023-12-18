@@ -29,4 +29,22 @@ public class ShopService {
 
         return orders.stream().filter(order -> order.status() == status).toList();
     }
+
+    public Order getOrderById(String id) {
+        return orderRepo.getOrderById(id);
+    }
+
+    public Order updateOrder(String id, OrderStatus status) {
+        Order order = orderRepo.getOrderById(id);
+
+        if(order == null) {
+            System.out.println("Order with id " + id + " could not be updated.");
+            return null;
+        }
+
+        Order updatedOrder = order.withStatus(status);
+
+        orderRepo.addOrder(updatedOrder);
+        return updatedOrder;
+    }
 }
