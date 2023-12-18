@@ -33,4 +33,34 @@ class ShopServiceTest {
         //THEN
         assertNull(actual);
     }
+
+    @Test
+    void getOrdersByStatusTest_WhenFilterByProcessing_ReturnOneOrder() {
+        // GIVEN
+        ShopService shopService = new ShopService();
+
+        List<String> productIds = List.of("1", "2");
+        shopService.addOrder(productIds);
+
+        // WHEN
+        int actual = shopService.getOrdersByStatus(OrderStatus.PROCESSING).size();
+
+        // THEN
+        assertEquals(1, actual);
+    }
+
+    @Test
+    void getOrdersByStatusTest_WhenFilterByCompleted_ReturnEmptyList() {
+        // GIVEN
+        ShopService shopService = new ShopService();
+
+        List<String> productIds = List.of("1", "2");
+        shopService.addOrder(productIds);
+
+        // WHEN
+        List<Order> actual = shopService.getOrdersByStatus(OrderStatus.COMPLETED);
+
+        // THEN
+        assertTrue(actual.isEmpty());
+    }
 }
